@@ -48,12 +48,12 @@ def transform_raw_data(path):
 
 # Fct de chargement du CSV nettoyé en enlevant la colonne 'TARGET'
 def load_app_train_clean():
-    app_train_clean = pd.read_csv('app_train_clean.csv', nrows=n_rows, index_col=0)
+    app_train_clean = pd.read_csv('https://raw.githubusercontent.com/MohamedBouzidGit/web-app-pret/master/app_train_clean.csv', nrows=n_rows, index_col=0)
     return app_train_clean.drop('TARGET', axis=1)
 
 
 # Appel à la fct de chargement du CSV infos clients (via données brutes)
-infos = transform_raw_data('application_train.csv')
+infos = transform_raw_data('https://raw.githubusercontent.com/MohamedBouzidGit/web-app-pret/master/application_train.csv')
 
 # Appel à la fct de chargement du CSV nettoyé
 data_processed = load_app_train_clean()
@@ -62,7 +62,7 @@ data_processed.index = data_processed.index.astype(int) # homonogéise l'index p
 
 
 # Chargement d'un CSV avec données moyennes pour chaque target
-moyennes_tmp = pd.read_csv('application_train.csv', index_col=0)
+moyennes_tmp = pd.read_csv('https://raw.githubusercontent.com/MohamedBouzidGit/web-app-pret/master/application_train.csv', index_col=0)
 moyennes_tmp2 = moyennes_tmp[['TARGET', 'EXT_SOURCE_1', 'EXT_SOURCE_2', 'EXT_SOURCE_3', 'AMT_ANNUITY', 'AMT_GOODS_PRICE', 'AMT_CREDIT', 'AMT_INCOME_TOTAL', 'DAYS_EMPLOYED', 'DAYS_BIRTH']]
 
 # Il existe des anomalies de jours (> 365243), donc on retire ces valeurs
@@ -284,7 +284,7 @@ st.markdown('''Les motifs de décisions sont représentés sur l'échelle par le
 
 
 # Preprocessing
-app_train_clean = pd.read_csv('app_train_clean.csv', nrows=n_rows, index_col=0)
+app_train_clean = pd.read_csv('https://raw.githubusercontent.com/MohamedBouzidGit/web-app-pret/master/app_train_clean.csv', nrows=n_rows, index_col=0)
 X = app_train_clean.drop(columns = ['TARGET'])
 Y = app_train_clean['TARGET']
 xtrain, xeval, ytrain, yeval = train_test_split(X, Y, train_size=0.8, random_state=6, stratify=Y)
