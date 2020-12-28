@@ -7,6 +7,5 @@ sklearn
 scipy
 shap
 lightgbm
-json
 Flask
 streamlit.components.v1
