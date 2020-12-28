@@ -7,4 +7,10 @@ sklearn
 scipy
 shap
 lightgbm
+
+# Ceux pas sûrs
 Flask
+requests
+matplotlib
+graphviz
+PyYAML
