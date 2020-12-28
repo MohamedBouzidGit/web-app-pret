@@ -7,3 +7,7 @@ sklearn
 scipy
 shap
 lightgbm
+request
+json
+Flask
+streamlit.components.v1
