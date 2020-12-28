@@ -71,6 +71,7 @@ data_processed['DAYS_REGISTRATION'] = (data_processed['DAYS_REGISTRATION'] * -1)
 # Chargement d'un CSV avec données moyennes pour chaque target
 moyennes_tmp = pd.read_csv('https://raw.githubusercontent.com/MohamedBouzidGit/web-app-pret/master/application_train.csv', index_col=0)
 moyennes_tmp2 = moyennes_tmp[['TARGET', 'EXT_SOURCE_1', 'EXT_SOURCE_2', 'EXT_SOURCE_3', 'AMT_ANNUITY', 'AMT_GOODS_PRICE', 'AMT_CREDIT', 'AMT_INCOME_TOTAL', 'DAYS_EMPLOYED', 'DAYS_BIRTH']]
+moyennes_tmp2 = moyennes_tmp2.fillna(moyennes_tmp2.mean())
 
 # Il existe des anomalies de jours (> 365243), donc on retire ces valeurs
 moyennes_tmp2['DAYS_EMPLOYED'] = moyennes_tmp2['DAYS_EMPLOYED'].replace({365243: np.nan})
@@ -97,6 +98,7 @@ with open('lgbc.pickle', 'rb') as file :
 # Définition d'un df "voisins" 'df_vois' encodant les 6 premières colonnes du des infos client (infos.iloc[:,:6])
 # L'encodage est fait car on a des colonnes de type classes et que l'on veut utiliser KNN dessus
 df_vois = pd.get_dummies(infos.iloc[:,:6])
+df_vois = df_vois.fillna(df_vois.mean())
 
 
 # Définition d'une var 'tree' qui fait un KNN type 'KDTree' sur 'df_vois' (la structure de df_vois reste inchangée)
