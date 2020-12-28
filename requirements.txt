@@ -1,0 +1,9 @@
+#Ce fichier nécessaire pour Heroku (fait manuellement) spécifie les librairies nécessaires pour notre app :
+streamlit
+plotly
+pandas
+numpy
+sklearn
+scipy
+shap
+lightgbm
