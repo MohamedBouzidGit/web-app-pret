@@ -8,4 +8,3 @@ scipy
 shap
 lightgbm
 Flask
-streamlit.components.v1
