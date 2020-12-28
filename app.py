@@ -6,6 +6,10 @@ import numpy as np
 import plotly.graph_objects as go
 import pickle
 from sklearn.neighbors import KDTree
+
+
+
+
 from sklearn.ensemble import GradientBoostingClassifier
 import shap
 import streamlit.components.v1 as components
@@ -59,6 +63,9 @@ infos = transform_raw_data('https://raw.githubusercontent.com/MohamedBouzidGit/w
 data_processed = load_app_train_clean()
 data_processed.index = data_processed.index.astype(int) # homonogéise l'index pour les différents dataframes
 
+# Conversion des critères journaliers en valeurs positives pour des graphiques plus cohérents
+data_processed['DAYS_ID_PUBLISH'] = (data_processed['DAYS_ID_PUBLISH'] * -1)
+data_processed['DAYS_REGISTRATION'] = (data_processed['DAYS_REGISTRATION'] * -1)
 
 
 # Chargement d'un CSV avec données moyennes pour chaque target
@@ -67,6 +74,7 @@ moyennes_tmp2 = moyennes_tmp[['TARGET', 'EXT_SOURCE_1', 'EXT_SOURCE_2', 'EXT_SOU
 
 # Il existe des anomalies de jours (> 365243), donc on retire ces valeurs
 moyennes_tmp2['DAYS_EMPLOYED'] = moyennes_tmp2['DAYS_EMPLOYED'].replace({365243: np.nan})
+moyennes_tmp2['DAYS_EMPLOYED'] = moyennes_tmp2['DAYS_EMPLOYED'].fillna(moyennes_tmp2['DAYS_EMPLOYED'].mean())
 
 # On ajoute deux colonnes de pourcentage par rapport aux revenus et à l'ancienneté
 moyennes_tmp2['CREDIT_INCOME_PERCENT'] = moyennes_tmp2['AMT_CREDIT'] / moyennes_tmp2['AMT_INCOME_TOTAL']
